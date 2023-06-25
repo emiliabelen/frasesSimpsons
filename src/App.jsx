@@ -1,7 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "./assets/logosimpson.png";
-import { Button, Container, mostrarSpinner } from "react-bootstrap";
+import { Button, Container, Spinner } from "react-bootstrap";
 import Frase from "./components/Frase";
 import { useEffect, useState } from "react";
 
@@ -27,7 +27,7 @@ function App() {
     }
   };
 
-  const mostrarComponente = mostrarSpinner ? (
+  const mostrarComponente = Spinner ? (
     <div className=" my-5 Spinner">
       <div class="rect1"></div>
       <div class="rect2"></div>
