@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [personaje, setPersonaje] = useState({});
+  const [mostrarSpinner, setMostrarSpinner] = useState(false);
 
   useEffect(() => {
     consultarAPI();
@@ -14,11 +15,17 @@ function App() {
 
   const consultarAPI = async () => {
     try {
+      //se pone el valor true para mostrar el spinner en la pantalla
+      setMostrarSpinner(true);
+
+      //hacemos un llamado a la API
       //vamos hacer una peticion GET
       const respuesta = await fetch(
         "https://thesimpsonsquoteapi.glitch.me/quotes"
       );
       const datos = await respuesta.json();
+      //se lo oculta al spinner de la pantalla con el valor false
+      setMostrarSpinner(false);
       console.log(respuesta);
       console.log(datos[0]);
       setPersonaje(datos[0]);
@@ -27,14 +34,14 @@ function App() {
     }
   };
 
-  const mostrarComponente = Spinner ? (
-    <div className=" my-5 Spinner">
-      <div class="rect1"></div>
-      <div class="rect2"></div>
-      <div class="rect3"></div>
-      <div class="rect4"></div>
-      <div class="rect5"></div>
-    </div>
+  //esta funcion permite mostrar el spinner si el valor de mostrarSpinner es true y ocultarlo si es false
+  const mostrarComponente = mostrarSpinner ? (
+    <>
+      <br />
+
+      <Spinner animation="border" />
+      <br />
+    </>
   ) : (
     <Frase personaje={personaje} />
   );
